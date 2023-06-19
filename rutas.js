@@ -4,7 +4,11 @@ const router = Router();
 
 //routes
 router.get("/", (req, res) => {
+<<<<<<< HEAD
   res.send("index");
+=======
+  res.render("index");
+>>>>>>> dbandModel
 });
 
 // router.get("/evento",(req, res) => {
