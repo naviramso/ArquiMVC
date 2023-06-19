@@ -1,14 +1,11 @@
 const { Router } = require("express");
 const router = Router();
-//const db = require("./baseDeDatos");
+
+const evento = require("./model/evento")
 
 //routes
 router.get("/", (req, res) => {
-<<<<<<< HEAD
   res.send("index");
-=======
-  res.render("index");
->>>>>>> dbandModel
 });
 
 // router.get("/evento",(req, res) => {
@@ -17,6 +14,7 @@ router.get("/", (req, res) => {
 router.post("/datosEvento",(req,res)=>{
   const formData = req.body;
   res.json(formData);
+  evento(formData.nombreEvento, formData.descripcion, formData.fechaInicio, '8:00', formData.fechaFin, formData.ubicacion)
 })
 
 module.exports = router;

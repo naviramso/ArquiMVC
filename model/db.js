@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host: 'localhost' || process.env.DB_HOST,       // Cambia esto según la configuración de tu servidor MySQL
+  host: '192.168.78.216' || process.env.DB_HOST,       // Cambia esto según la configuración de tu servidor MySQL
   user: 'root' || process.env.DB_USER,            // Cambia esto según tu usuario de MySQL
   password: '' || process.env.DB_PASSWORD,   
   port: 3306 || process.env.DB_PORT,            // Cambia esto según tu contraseña de MySQL
