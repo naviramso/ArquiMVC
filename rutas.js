@@ -4,7 +4,7 @@ const router = Router();
 
 //routes
 router.get("/", (req, res) => {
-  res.send("Arqui!!!");
+  res.render("index");
 });
 
 router.get("/evento",(req, res) => {
