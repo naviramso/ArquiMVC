@@ -11,4 +11,7 @@ router.get("/evento",(req, res) => {
     res.send("");
 })
 
+router.get("/artista",(req, res) => {
+    
+})
 module.exports = router;
