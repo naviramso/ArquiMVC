@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 // })
 router.post("/datosEvento",(req,res)=>{
   const formData = req.body;
-  res.json(formData);
+  // res.json(formData);
   evento(formData.nombreEvento, formData.descripcion, formData.fechaInicio, '8:00', formData.fechaFin, formData.ubicacion)
 })
 
