@@ -1,0 +1,21 @@
+@startuml 
+
+class "Cliente" {
+    - ClienteID
+    - Nombre
+    - Dirección
+    - Teléfono
+    
+    getClienteID() 
+    getNombre()
+    getDirección()
+    getTeléfono()
+}
+
+class "Evento" {
+    - EventoID
+    - Nombre
+    - Fecha
+    - Ubicación
+}
+@enduml

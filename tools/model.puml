@@ -1,0 +1,52 @@
+@startuml
+entity "Cliente" {
+  + ClienteID
+  Nombre
+  Dirección
+  Teléfono
+  ...
+}
+
+entity "Evento" {
+  + EventoID
+  Nombre
+  Fecha
+  Ubicación
+  ...
+}
+
+entity "Ticket" {
+  + TicketID
+  Precio
+  Tipo de Asiento
+  Estado
+  ...
+}
+
+entity "Compra" {
+  ClienteID
+  TicketID
+  Fecha de Compra
+  Cantidad
+  ...
+}
+
+entity "Reserva" {
+  ClienteID
+  TicketID
+  Fecha de Reserva
+  Fecha Límite
+  ...
+}
+
+entity "Asignación" {
+  TicketID
+  ClienteID
+}
+
+Cliente ||--o{ Compra
+Cliente ||--o{ Reserva
+Evento ||--o{ Ticket
+Reserva }o--|{ Asignación
+
+@enduml
