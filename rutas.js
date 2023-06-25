@@ -3,7 +3,7 @@ const router = Router();
 
 //routes
 router.get("/", (req, res) => {
-  res.send("index");
+  res.render("index");
 });
 
 router.post("/datosEvento",(req,res)=>{
@@ -11,5 +11,7 @@ router.post("/datosEvento",(req,res)=>{
   res.json(formData);
 })
 
-
+router.get("/artista",(req, res) => {
+    
+})
 module.exports = router;

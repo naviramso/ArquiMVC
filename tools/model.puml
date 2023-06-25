@@ -1,52 +1,79 @@
 @startuml
-entity "Cliente" {
-  + ClienteID
-  Nombre
-  Dirección
-  Teléfono
-  ...
+
+!define ENTITY_TABLE(x) class x << (E,lightgreen) >>
+!define PK_FIELD(x) <u>x</u>
+!define FK_FIELD(x) <u>x</u>
+!define DATE_FIELD(x) <u>x</u>
+!define TIME_FIELD(x) <u>x</u>
+!define DECIMAL_FIELD(x) <u>x</u>
+
+ENTITY_TABLE(usuarios) {
+  PK_FIELD(id) INT UNSIGNED
+  nombre VARCHAR(100)
+  email VARCHAR(100)
+  password VARCHAR(100)
+  DATE_FIELD(fecha_nacimiento)
+  ruta_imagen VARCHAR(100)
+  DATE_FIELD(fecha_creacion)
+  DATE_FIELD(ultima_actualizacion)
+  tipo_usuario VARCHAR(50)
 }
 
-entity "Evento" {
-  + EventoID
-  Nombre
-  Fecha
-  Ubicación
-  ...
+ENTITY_TABLE(eventos) {
+  PK_FIELD(id) INT UNSIGNED
+  nombre_evento VARCHAR(100)
+  descripcion TEXT
+  DATE_FIELD(fecha_evento)
+  TIME_FIELD(hora_evento)
+  DATE_FIELD(fecha_cierre)
+  ubicacion VARCHAR(100)
+  ruta_imagen VARCHAR(100)
+  DATE_FIELD(ultima_actualizacion)
 }
 
-entity "Ticket" {
-  + TicketID
-  Precio
-  Tipo de Asiento
-  Estado
-  ...
+ENTITY_TABLE(artista_eventos) {
+  FK_FIELD(id_evento) INT UNSIGNED
+  FK_FIELD(id_artista) INT UNSIGNED
+  DATE_FIELD(ultima_actualizacion)
 }
 
-entity "Compra" {
-  ClienteID
-  TicketID
-  Fecha de Compra
-  Cantidad
-  ...
+ENTITY_TABLE(artistas) {
+  PK_FIELD(id) INT UNSIGNED
+  nombre_artista VARCHAR(100)
+  ruta_imagen VARCHAR(100)
+  DATE_FIELD(ultima_actualizacion)
 }
 
-entity "Reserva" {
-  ClienteID
-  TicketID
-  Fecha de Reserva
-  Fecha Límite
-  ...
+ENTITY_TABLE(boletos) {
+  PK_FIELD(id) INT UNSIGNED
+  FK_FIELD(id_evento) INT UNSIGNED
+  DECIMAL_FIELD(precio)
+  DATE_FIELD(ultima_actualizacion)
 }
 
-entity "Asignación" {
-  TicketID
-  ClienteID
+ENTITY_TABLE(reservas) {
+  PK_FIELD(id) INT UNSIGNED
+  FK_FIELD(id_venta) INT UNSIGNED
+  FK_FIELD(id_boleto) INT UNSIGNED
+  FK_FIELD(id_usuario) INT UNSIGNED
+  cant_reserva INT UNSIGNED
+  DATE_FIELD(fecha_reserva)
+  DATE_FIELD(ultima_actualizacion)
 }
 
-Cliente ||--o{ Compra
-Cliente ||--o{ Reserva
-Evento ||--o{ Ticket
-Reserva }o--|{ Asignación
+ENTITY_TABLE(ventas) {
+  PK_FIELD(id) INT UNSIGNED
+  FK_FIELD(id_usuario) INT UNSIGNED
+  DATE_FIELD(fecha_venta)
+  DECIMAL_FIELD(total_venta)
+  DATE_FIELD(ultima_actualizacion)
+}
+
+usuarios --|{ ventas
+ventas --|{ reservas
+eventos --|{ boletos
+eventos -- artista_eventos
+artistas -- artista_eventos
+boletos -- reservas
 
 @enduml

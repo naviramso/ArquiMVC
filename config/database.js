@@ -1,17 +1,30 @@
-const mysql = require('mysql')
+const { Sequelize } = require("sequelize");
 
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST ||  'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'eventos_db',
-    port: process.env.DB_PORT || 3306,
-})
-
-if (connection) {
-    console.log('Conexión exitosa')
-} else {
-    console.log('Error de conexión')
+const parametres = {
+    db : process.env.DB || "eventos_db",
+    host: process.env.HOST || "localhost",
+    user: process.env.USER || "root",
+    password: process.env.PASSWORD || "",
+    port: process.env.PORT || 3306,
+    dialect: "mysql",
+    logging: false,
 }
 
-module.exports = connection;
+// Configuración de la conexión a la base de datos
+const sequelize = new Sequelize(parametres.db, parametres.user, parametres.password, {
+  host: parametres.host,
+  port: parametres.port,
+  dialect: parametres.dialect,
+});
+
+// Prueba de conexión
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Conexión establecida correctamente.");
+  })
+  .catch((error) => {
+    console.error("No se pudo conectar a la base de datos:", error);
+  });
+
+module.exports = sequelize;
