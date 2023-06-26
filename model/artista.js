@@ -1,38 +1,8 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../config/database");
 
-class Artista {
-  static init() {
-    return sequelize.define(
-      "Artista",
-      {
-        id: {
-          type: DataTypes.INTEGER.UNSIGNED,
-          primaryKey: true,
-          autoIncrement: true,
-        },
-        nombre_artista: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
-        },
-        ruta_imagen: {
-          type: DataTypes.STRING(100),
-        },
-        ultima_actualizacion: {
-          type: DataTypes.DATE,
-          allowNull: false,
-          defaultValue: DataTypes.NOW,
-          onUpdate: DataTypes.NOW,
-        },
-      },
-      {
-        tableName: "artistas",
-        timestamps: false,
-      }
-    );
-  }
-
-  static async crearArtista(nombre, ruta_imagen) {
+class Artista extends Model {
+  crearArtista = async (nombre, ruta_imagen) => {
     try {
       const Artista = await Artista.create({
         nombre_artista: nombre,
@@ -44,9 +14,9 @@ class Artista {
       console.log(err);
       throw err;
     }
-  }
+  };
 
-  static async getArtista(id) {
+  getArtista = async (id) => {
     try {
       const Artista = await Artista.findByPk(id);
       return Artista;
@@ -54,9 +24,9 @@ class Artista {
       console.log(err);
       throw err;
     }
-  }
+  };
 
-  static async getArtistas() {
+  getArtistas = async () => {
     try {
       const Artistas = await Artista.findAll();
       return Artistas;
@@ -66,7 +36,7 @@ class Artista {
     }
   }
 
-  static async updateArtista(id, nuevos_datos) {
+  updateArtista = async (id, nuevos_datos) => {
     try {
       const Artista = await Artista.update(nuevos_datos, {
         where: { id: id },
@@ -78,7 +48,7 @@ class Artista {
     }
   }
 
-  static async deleteArtista(id) {
+  deleteArtista = async (id) => {
     try {
       const Artista = await Artista.destroy({
         where: { id: id },
@@ -91,5 +61,37 @@ class Artista {
   }
 }
 
-Artista.init();
-module.exports = Artista;
+Artista.init({
+  id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  nombre_artista: {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+  },
+  ruta_imagen: {
+    type: DataTypes.STRING(100),
+  },
+  fecha_creacion: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+  },
+  ultima_actualizacion: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+    onUpdate: DataTypes.NOW,
+  },
+},
+{
+  sequelize,
+  tableName: "artistas",
+  createdAt: "fecha_creacion",
+  updatedAt: "ultima_actualizacion",
+})
+
+const artist = new Artista();
+module.exports = {artist, Artista};

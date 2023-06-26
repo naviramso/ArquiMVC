@@ -1,104 +1,98 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../config/database");
+const { Evento } = require("./Evento")
+const { Artista } = require("./Artista")
 
-class ArtistaEvento {
-  static init() {
-    return sequelize.define(
-      "ArtistaEvento",
-      {
-        id_artista: {
-          type: DataTypes.INTEGER.UNSIGNED,
-        },
-        id_evento: {
-          type: DataTypes.INTEGER.UNSIGNED,
-        },
-        ultima_actualizacion: {
-          type: DataTypes.DATE,
-          allowNull: false,
-          defaultValue: DataTypes.NOW,
-          onUpdate: DataTypes.NOW,
-        },
-      },
-      {
-        tableName: "artista_eventos",
-        timestamps: false,
-      }
-    );
-  }
-
-  static async associate(){
-    // Definir las asociaciones con otros modelos
-    ArtistaEvento.belongsTo(Evento, {
-      foreignKey: "id_evento",
-      targetKey: "id_evento",
-      as: "evento",
-    });
-    ArtistaEvento.belongsTo(Artista, {
-      foreignKey: "id_artista",
-      targetKey: "id_artista",
-      as: "artista",
-    })
-  }
-
-  static async getArtistaEvento(id_artista, id_evento){
+class ArtistaEvento extends Model{
+  getArtistaEvento = async () => {
     try {
-      const ArtistaEvento = await ArtistaEvento.findByPk(id_artista, id_evento);
+      const ArtistaEvento = await ArtistaEvento.findAll();
       return ArtistaEvento;
     } catch (err) {
       console.log(err);
       throw err;
     }
-  }
+  };
 
-  static async createArtistaEvento(id_artista, id_evento){
+  createArtistaEvento = async (data) => {
     try {
-      const ArtistaEvento = await ArtistaEvento.create({
-        id_artista: id_artista,
-        id_evento: id_evento,
+      const ArtistaEvento = await ArtistaEvento.create(data);
+      return ArtistaEvento.toJSON();
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+
+  updateArtistaEvento = async (data) => {
+    try {
+      const ArtistaEvento = await ArtistaEvento.update(data, {
+        where: { id_artista: data.id_artista, id_evento: data.id_evento },
       });
       return ArtistaEvento;
     } catch (err) {
       console.log(err);
       throw err;
     }
-  }
+  };
 
-  static async deleteArtistaEvento(id_artista, id_evento){
+  deleteArtistaEvento = async (data) => {
     try {
       const ArtistaEvento = await ArtistaEvento.destroy({
-        where: {
-          id_artista: id_artista,
-          id_evento: id_evento,
-        },
+        where: { id_artista: data.id_artista, id_evento: data.id_evento },
       });
       return ArtistaEvento;
     } catch (err) {
       console.log(err);
       throw err;
     }
-  }
-
-  static async updateArtistaEvento(id_artista, id_evento, precio){
-    try {
-      const ArtistaEvento = await ArtistaEvento.update(
-        {
-          precio: precio,
-        },
-        {
-          where: {
-            id_artista: id_artista,
-            id_evento: id_evento,
-          },
-        }
-      );
-      return ArtistaEvento;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  }
+  };
 }
 
-ArtistaEvento.init();
-ArtistaEvento.associate();
+ArtistaEvento.init(
+  {
+    id_artista: {
+      type: DataTypes.INTEGER.UNSIGNED,
+    },
+    id_evento: {
+      type: DataTypes.INTEGER.UNSIGNED,
+    },
+    fecha_creacion: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    ultima_actualizacion: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+      onUpdate: DataTypes.NOW,
+    },
+  },
+  {
+    sequelize,
+    tableName: "artista_eventos",
+    createdAt: "fecha_creacion",
+    updatedAt: "ultima_actualizacion",
+  }
+);
+
+ArtistaEvento.belongsTo(Evento, {
+  foreignKey: "id_evento",
+  targetKey: "id",
+  as: "eventos",
+});
+
+ArtistaEvento.belongsTo(Artista, {
+  foreignKey: "id_artista",
+  targetKey: "id",
+  as: "artistas",
+});
+
+const artista = new ArtistaEvento();
+artista.createArtistaEvento({
+  id_artista: 1,
+  id_evento: 1,
+})
+
 module.exports = ArtistaEvento;
