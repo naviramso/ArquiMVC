@@ -10,12 +10,12 @@
     <div
       class="bg-dark d-flex justify-content-center align-items-center vh-100"
     >
-      <div class="box">
-        <form action="/index">
-          <h1 class="text1 text-light">Login</h1>
+      <div class="box1">
+        <form action="/">
+          <h1 class="text1 text-light">Registrate</h1>
           <div class="row">
             <div class="col-md-7 text-light">
-              <label htmlFor="nombreUsuario" class="label2">Nombre de Usuario</label>
+              <label htmlFor="nombreUsuario" class="label2">Username</label>
               <input
                 type="text"
                 name="nombreUsuario"
@@ -36,19 +36,24 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-md-7 text-light">
+              <label htmlFor="Password" class="label2">Contrasenia</label>
+              <input
+                type="password"
+                name="Password"
+                id="login"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-7">
               <button type="submit" class="btn btn-danger" id="btnlogin">
-                Ingresar
+                Registrar
               </button>
             </div>
           </div>
         </form>
-        <p class="text-light" id="parrafo">
-            No tienes cuenta
-            <a class="strectched-link d-inline block" href="/register"
-              >Registrate</a
-            >
-          </p>
       </div>
     </div>
   </body>

@@ -7,6 +7,12 @@ const evento = require("./model/evento")
 router.get("/", (req, res) => {
   res.render('login');
 });
+router.get('/register',(req,res)=>{
+  res.render('register');
+})
+router.post('/',(req,res)=>{
+  res.render('login')
+})
 
 router.get("/index", (req, res) => {
   res.render('index',{title:'mi pagina con ejs'})

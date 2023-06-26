@@ -5,6 +5,9 @@
     background-position: bottom;
     background-size: cover;
 }
+.main-container{
+    background-color: #3D4E5A;
+}
 .col-md-4{
     margin-top: 20px;
 }
@@ -49,8 +52,35 @@
 }
 .box{
     /* margin-top:1.5em; */
-    width: 35%;
+    width: 27%;
     height: 50vh;
-    background-color:white;
+    background-color:#3D4E5A;
+    border-radius: 4em;
+}
+.text1{
+    text-align: center;
+    margin-top: 20px;
+
+}
+.label2{
+    margin-left:5.5em;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+#login{
+    margin-left: 5.5em;
+}
+#btnlogin{
+    margin-left: 10em;
+    margin-top: 1.5em;
+}
+#parrafo{
+    margin-top: 1em;
+    margin-left: 5.5em;
+}
+.box1{
+    width: 27%;
+    height: 60vh;
+    background-color:#3D4E5A;
     border-radius: 4em;
 }
