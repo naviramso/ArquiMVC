@@ -1,0 +1,56 @@
+.image{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/evento3.jpg');
+    background-position: bottom;
+    background-size: cover;
+}
+.col-md-4{
+    margin-top: 20px;
+}
+#ultimo{
+    margin-left: 79em;
+}
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + .label1 {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: #DC3545;
+    display: flex;
+    border-radius: 4px;
+    justify-content: center;
+    margin-left: 5em;
+    margin-top: 2.1em;
+    width: 50%;
+}
+
+.inputfile:focus + .label1,
+.inputfile + .label1:hover {
+    background-color: red;
+}
+.inputfile + .label1 {
+	cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + .label1 {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+.col .btn{
+    margin: auto;
+    margin-top: 50px;
+}
+.box{
+    /* margin-top:1.5em; */
+    width: 35%;
+    height: 50vh;
+    background-color:white;
+    border-radius: 4em;
+}
