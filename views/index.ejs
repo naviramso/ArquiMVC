@@ -9,6 +9,31 @@
   <body class="main-container">
     <%- include('partials/nav.ejs') %>
     <h1 class="text-center text-light">Eventos</h1>
-    
+
+    <div class="container d-flex flex-col gap-4 justify-content-center">
+      <div class="card mb-3 w-80 rounded-3" id="container-card">
+        <div class="row rounded-start">
+          <div class="col-md-3 rounded-start">
+            <img src="/fondo.jpg" class="img-fluid h-100" alt="..." />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title text-light">Card title</h5>
+              <p class="card-text text-light">
+                Ubicacion : <br/>
+                Fecha de Inicio:<br/>
+                Fecha de Cierre:<br/>
+                Hora del evento:
+              </p>
+
+              <div class="d-flex justify-content-end gap-3" id="buttons">
+                <a href="/boletos" class="btn btn-danger">Reservar Boletos</a>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

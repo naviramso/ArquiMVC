@@ -11,9 +11,6 @@
 .col-md-4{
     margin-top: 20px;
 }
-#ultimo{
-    margin-left: 79em;
-}
 .inputfile {
 	width: 0.1px;
 	height: 0.1px;
@@ -83,4 +80,16 @@
     height: 60vh;
     background-color:#3D4E5A;
     border-radius: 4em;
+}
+.card{
+    background-color: #33383D;
+}
+.card-title{
+    font-size:2rem;
+}
+#buttons{
+    margin-left:auto;
+}
+#container-card{
+    margin-top: 1rem;
 }
