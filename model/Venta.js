@@ -1,95 +1,104 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/database');
 
 class Venta extends Model {
-  static init() {
-    return sequelize.define('Venta', {
-      id: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      id_usuario: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-      },
-      fecha_venta: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-      },
-      total_venta: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-      },
-      ultima_actualizacion: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-        onUpdate: DataTypes.NOW,
-      },
-    }, {
-      tableName: 'ventas',
-      timestamps: false,
-    });
-  }
-
-  static associate(){
-    this.belongsTo(Usuario, {
-      foreignKey: 'id_usuario',
-      targetKey: 'id',
-      as: 'usuario',
-    })
-  }
-
-  static async getVentas(id_usuario){
-    try {
-      const Venta = await this.findByPk(id_usuario);
-      return Venta;
-    } catch (err) {
+  getVenta = (id) => {
+    try{
+      const venta = Venta.findByPk(id);
+      return venta.toJSON();
+    }catch{
       console.log(err);
       throw err;
     }
   }
 
-  static async getVentasByUsuario(id_usuario){
-    try {
-      const Venta = await this.findByPk(id_usuario);
-      return Venta;
-    } catch (err) {
+  getVentas = () => {
+    try{
+      const ventas = Venta.findAll();
+      return ventas.map((venta) => venta.toJSON());
+    }catch{
       console.log(err);
       throw err;
     }
   }
 
-  static async createVenta(id_usuario, fecha_venta, total_venta) {
-    try {
-      const Venta = await this.create({
-        id_usuario: id_usuario,
-        fecha_venta: fecha_venta,
-        total_venta: total_venta,
+  createVenta = (data) => {
+    try{
+      const venta = Venta.create(data);
+      return venta.toJSON();
+    }catch{
+      console.log(err);
+      throw err;
+    }
+  }
+
+  updateVenta = (id, nuevos_datos) => {
+    try{
+      const venta = Venta.update(nuevos_datos, {
+        where: { id: id },
       });
-      return Venta;
-    } catch (err) {
+      return venta;
+    }catch{
       console.log(err);
       throw err;
     }
   }
 
-  static async deleteVenta(id_usuario){
-    try {
-      const Venta = await this.destroy({
-        where: { id_usuario: id_usuario },
+  deleteVenta = (id) => {
+    try{
+      const venta = Venta.destroy({
+        where: { id: id },
       });
-      return Venta;
-    } catch (err) {
+      return venta;
+    }catch{
       console.log(err);
       throw err;
     }
   }
-
 }
 
-Venta.init();
-Venta.associate();
-module.exports = Venta;
+Venta.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  id_usuario: {
+    type: DataTypes.INTEGER,
+  },
+  fecha_venta : {
+    type: DataTypes.TIME,
+    allowNull: false,
+  },
+  total_venta: {
+    type: DataTypes.DECIMAL(10, 2),
+    allowNull: false
+  },
+  fecha_creacion: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+  },
+  ultima_actualizacion: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+    onUpdate: DataTypes.NOW,
+  }
+},{
+  sequelize,
+  modelName: 'Venta',
+  tableName: 'ventas',
+  createdAt: 'fecha_creacion',
+  updatedAt: 'ultima_actualizacion',
+})
+
+Venta.belongsTo(Usuario,{
+  foreignKey: 'id_usuario',
+  keyType:'id',
+  as: 'usuario',
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE',
+})
+
+module.exports = new Venta();

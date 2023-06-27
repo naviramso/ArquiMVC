@@ -9,6 +9,8 @@ USE eventos_db;
 -- --------------------------------------------------------------
 -- TABLE user												-
 -- --------------------------------------------------------------
+
+DROP table if exists usuarios;
 CREATE TABLE usuarios (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(100) NOT NULL,
@@ -16,7 +18,7 @@ CREATE TABLE usuarios (
   contrasenia VARCHAR(100) NOT NULL,
   fecha_nacimiento DATE NOT NULL,
   ruta_imagen VARCHAR(100),
-  tipo_usuario ENUM('administrador', 'usuario') NOT NULL DEFAULT 'user',
+  tipo_usuario enum('administrador', 'cliente') DEFAULT 'cliente',
   fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   ultima_actualizacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id)

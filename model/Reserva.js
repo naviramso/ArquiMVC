@@ -1,128 +1,123 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model} = require('sequelize');
 const sequelize = require('../config/database');
 
-class Reserva {
-  static init() {
-    return sequelize.define('Reserva', {
-      id: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      id_venta: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-      },
-      id_boleto: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-      },
-      id_usuario: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-      },
-      cant_reserva: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-      },
-      fecha_reserva: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-      },
-      ultima_actualizacion: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-        onUpdate: DataTypes.NOW,
-      },
-    }, {
-      tableName: 'reservas',
-      timestamps: false,
-    });
-  }
-
-  static async associate(){
-    await this.belongsTo(Venta, {
-      foreignKey: 'id_venta',
-      targetKey: 'id',
-      as: 'venta',
-    }); 
-    await this.belongsTo(Boleto, {
-      foreignKey: 'id_boleto',
-      targetKey: 'id',
-      as: 'boleto',
-    });
-    await this.belongsTo(Usuario, {
-      foreignKey: 'id_usuario',
-      targetKey: 'id',
-      as: 'usuario',
-    })
-  }
-
-  static async createReserva(id_venta, id_boleto, id_usuario, cant_reserva) {
+class Reserva extends Model {
+  createReserva = async (data) => {
     try {
-      const Reserva = await this.create({
-        id_venta: id_venta,
-        id_boleto: id_boleto,
-        id_usuario: id_usuario,
-        cant_reserva: cant_reserva,
+      const reserva = await Reserva.create(data);
+      return reserva.toJSON();
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+
+  updateReserva = async (id, data) => {
+    try {
+      const reserva = await Reserva.update(data, {
+        where: { id: id },
       });
-      return Reserva;
+      return reserva;
     } catch (err) {
       console.log(err);
       throw err;
     }
   }
 
-  static async getReserva(id_venta, id_boleto, id_usuario) {
+  deleteReserva = async (id) => {
     try {
-      const Reserva = await this.findByPk(id_venta, id_boleto, id_usuario);
-      return Reserva;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  }
-
-  static async deleteReserva(id_venta, id_boleto, id_usuario) {
-    try {
-      const Reserva = await this.destroy({
-        where: {
-          id_venta: id_venta,
-          id_boleto: id_boleto,
-          id_usuario: id_usuario,
-        },
+      const reserva = await Reserva.destroy({
+        where: { id: id },
       });
-      return Reserva;
+      return reserva;
     } catch (err) {
       console.log(err);
       throw err;
     }
   }
 
-  static async updateReserva(id_venta, id_boleto, id_usuario, cant_reserva) {
+  getReserva = async (id) => {
     try {
-      const Reserva = await this.update(
-        {
-          cant_reserva: cant_reserva,
-        },
-        {
-          where: {
-            id_venta: id_venta,
-            id_boleto: id_boleto,
-            id_usuario: id_usuario,
-          },
-        }
-      );
-      return Reserva;
+      const reserva = await Reserva.findByPk(id);
+      return reserva.toJSON();
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
+
+  getReservas = async () => {
+    try {
+      const reservas = await Reserva.findAll();
+      return reservas.map((reserva) => reserva.toJSON());
     } catch (err) {
       console.log(err);
       throw err;
     }
   }
 }
+ 
+Reserva.init({
+  id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  id_venta: {
+    type: DataTypes.INTEGER.UNSIGNED,
+  },
+  id_boleto: {
+    type: DataTypes.INTEGER.UNSIGNED,
+  },
+  id_usuario: {
+    type: DataTypes.INTEGER.UNSIGNED,
+  },
+  cantidad_reserva : {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+  },
+  fecha_creacion: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+  },
+  ultima_actualizacion: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+    onUpdate: DataTypes.NOW,
+  }
+},{
+  sequelize,
+  modelName: 'reserva',
+  tableName: 'reservas',
+  createdAt: 'fecha_creacion',
+  updatedAt: 'ultima_actualizacion',
+})
 
-Reserva.init();
-Reserva.associate();
-module.exports = Reserva;
+Reserva.belongsTo(Usuario, {
+  foreignKey: 'id_usuario',
+  targetKey: 'id',
+  as: 'usuario',
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE',
+})
+
+Reserva.belongsTo(Boleto, {
+  foreignKey: 'id_boleto',
+  targetKey: 'id',
+  as: 'boleto',
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE',
+})
+
+Reserva.belongsTo(Venta, {
+  foreignKey: 'id_venta',
+  targetKey: 'id',
+  as: 'venta',
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE',
+})
+
+
+module.exports = new Reserva();

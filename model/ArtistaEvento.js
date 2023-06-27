@@ -1,7 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../config/database");
 const { Evento } = require("./Evento")
-const { Artista } = require("./Artista")
+const { Artista } = require("./artista")
 
 class ArtistaEvento extends Model{
   getArtistaEvento = async () => {
@@ -81,18 +81,16 @@ ArtistaEvento.belongsTo(Evento, {
   foreignKey: "id_evento",
   targetKey: "id",
   as: "eventos",
+  onDelete: "RESTRICT",
+  onUpdate: "CASCADE",
 });
 
 ArtistaEvento.belongsTo(Artista, {
   foreignKey: "id_artista",
   targetKey: "id",
   as: "artistas",
+  onDelete: "RESTRICT",
+  onUpdate: "CASCADE",
 });
 
-const artista = new ArtistaEvento();
-artista.createArtistaEvento({
-  id_artista: 1,
-  id_evento: 1,
-})
-
-module.exports = ArtistaEvento;
+module.exports = new ArtistaEvento();
