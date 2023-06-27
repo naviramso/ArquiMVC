@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/heads.ejs') %>
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="bg-dark d-flex justify-content-center align-items-center vh-100"
+    >
+      <div class="box">
+        <form action="/index">
+          <h1 class="text1 text-light">Login</h1>
+          <div class="row">
+            <div class="col-md-7 text-light">
+              <label htmlFor="nombreUsuario" class="label2">Nombre de Usuario</label>
+              <input
+                type="text"
+                name="nombreUsuario"
+                id="login"
+                class="form-control login"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7 text-light">
+              <label htmlFor="email" class="label2">Correo Electronico</label>
+              <input
+                type="email"
+                name="email"
+                id="login"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+              <button type="submit" class="btn btn-danger" id="btnlogin">
+                Ingresar
+              </button>
+            </div>
+          </div>
+        </form>
+        <p class="text-light" id="parrafo">
+            No tienes cuenta
+            <a class="strectched-link d-inline block" href="/register"
+              >Registrate</a
+            >
+          </p>
+      </div>
+    </div>
+  </body>
+</html>

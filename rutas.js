@@ -1,12 +1,35 @@
 const { Router } = require("express");
 const router = Router();
-const eventoController = require("./controller/eventoController");
+
+const evento = require("./model/Evento")
+
 //routes
 router.get("/", (req, res) => {
-  res.render("index");
+  res.render('login');
 });
+router.get('/register',(req,res)=>{
+  res.render('register');
+})
+router.post('/',(req,res)=>{
+  res.render('login')
+})
 
-router.post("/datosEvento", eventoController.createEvento);
+router.get("/index", (req, res) => {
+  res.render('index',{title:'mi pagina con ejs'})
+});
+router.get('/views/evento.ejs',(req,res)=>{
+  res.render('evento',{title:'Crear Evento'})
+})
+
+
+// router.get("/evento",(req, res) => {
+//     res.send("");
+// })
+// router.post("/datosEvento",(req,res)=>{
+//   const formData = req.body;
+//   // res.json(formData);
+//   evento(formData.nombreEvento, formData.descripcion, formData.fechaInicio, '8:00', formData.fechaFin, formData.ubicacion)
+// })
 
 router.get("/artista", (req, res) => {});
 module.exports = router;

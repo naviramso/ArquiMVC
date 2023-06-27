@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/heads.ejs')%>
+    <title>Document</title>
+  </head>
+  <body class="image">
+    <%- include('partials/nav.ejs') %>
+    <div class="container">
+      <div>
+        <h1 class="text-center text-light"><%= title %></h1>
+      </div>
+      <form action="">
+        <div class="row">
+          <div class="col-md-4">
+            <label htmlFor="nombreEvento" class="form-label text-light"
+              >Nombre del Evento</label
+            >
+            <input type="text" name="nombreEvento" id="" class="form-control border-dark" />
+          </div>
+          <div class="col-md-4">
+            <label htmlFor="fechaInicio" class="form-label text-light"
+              >Fecha de Inicio</label
+            >
+            <input type="date" name="fechaInicio" id="" class="form-control border-dark" />
+          </div>
+          <div class="col-md-4">
+            <label htmlFor="fechaFin" class="form-label text-light"
+              >Nombre de Cierre</label
+            >
+            <input type="date" name="fechaFin" id="" class="form-control border-dark" />
+          </div>
+          <div class="col-md-4">
+            <label htmlFor="horaEvento" class="form-label text-light"
+              >Hora del Evento</label
+            >
+            <input type="time" name="horaEvento" id="" class="form-control border-dark" />
+          </div>
+          <div class="col-md-4">
+            <label htmlFor="ubicacion" class="form-label text-light"
+              >Ubicacion</label
+            >
+            <input type="text" name="ubicacion" id="" class="form-control border-dark" />
+          </div>
+          <div class="col-md-4">
+            <input type="file" name="file" id="file" class="inputfile" />
+            <label for="file" class="label1">Subir Imagen</label>
+          </div>
+          <div class="col btn">
+            <button type="submit" class="btn btn-danger">Registrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
