@@ -14,7 +14,12 @@ router.post('/',(req,res)=>{
   res.render('login')
 })
 
+router.get('/boletos',(req,res)=>{
+  res.render('reservarBoletos')
+})
+
 router.get("/index", (req, res) => {
+
   res.render('index',{title:'mi pagina con ejs'})
 });
 router.get('/views/evento.ejs',(req,res)=>{
