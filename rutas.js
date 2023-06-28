@@ -19,9 +19,14 @@ router.get('/boletos',(req,res)=>{
 })
 
 router.get("/index", (req, res) => {
-
   res.render('index',{title:'mi pagina con ejs'})
 });
+router.post("/index",(req,res)=>{
+  const {nombreUsuario,password} = req.body
+  console.log(nombreUsuario)
+  console.log(password)
+  res.render('index')
+})
 router.get('/views/evento.ejs',(req,res)=>{
   res.render('evento',{title:'Crear Evento'})
 })
