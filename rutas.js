@@ -1,30 +1,37 @@
 const { Router } = require("express");
 const router = Router();
 
-const evento = require("./model/Evento")
+const eventCont = require("./controller/eventoController");
+const userCont = require("./controller/userController");
 
 //routes
 router.get("/", (req, res) => {
-  res.render('login');
+  res.render('login2');
 });
 router.get('/register',(req,res)=>{
   res.render('register');
 })
-router.post('/',(req,res)=>{
-  res.render('login')
-})
+
+router.post('/register', userCont.createUser)
+
+router.post('/login', userCont.getUser)
 
 router.get('/boletos',(req,res)=>{
   res.render('reservarBoletos')
 })
 
 router.get("/index", (req, res) => {
-
   res.render('index',{title:'mi pagina con ejs'})
 });
-router.get('/views/evento.ejs',(req,res)=>{
+router.get('/evento',(req,res)=>{
   res.render('evento',{title:'Crear Evento'})
 })
+
+router.get("/perfil", (req, res) => {
+  res.render("perfil");
+})
+
+router.post('/create_evento' , eventCont.createEvento)
 
 
 // router.get("/evento",(req, res) => {

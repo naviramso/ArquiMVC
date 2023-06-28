@@ -84,6 +84,7 @@ CREATE TABLE boletos (
 -- --------------------------------------------------------------
 -- TABLE RESERVA							-
 -- --------------------------------------------------------------
+
 CREATE TABLE reservas (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_venta INT UNSIGNED NOT NULL,
@@ -102,10 +103,10 @@ CREATE TABLE reservas (
   CONSTRAINT fk_usuario_reserva FOREIGN KEY (id_usuario) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 -- --------------------------------------------------------------
 -- TABLE VENTA											-
 -- --------------------------------------------------------------
+
 CREATE TABLE ventas (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_usuario INT UNSIGNED NOT NULL,

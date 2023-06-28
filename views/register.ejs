@@ -1,60 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('partials/heads.ejs') %>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('partials/heads.ejs') %>
     <title>Document</title>
-  </head>
-  <body>
-    <div
-      class="bg-dark d-flex justify-content-center align-items-center vh-100"
-    >
-      <div class="box1">
-        <form action="/" method="post">
-          <h1 class="text1 text-light">Registrate</h1>
-          <div class="row">
-            <div class="col-md-7 text-light">
-              <label htmlFor="nombreUsuario" class="label2">Username</label>
-              <input
-                type="text"
-                name="nombreUsuario"
-                id="login"
-                class="form-control login"
-              />
+</head>
+
+<body class="bg-dark">
+  <%- include('partials/nav2.ejs') %>
+    <div class="bg-dark d-flex justify-content-center align-items-center vh-100">
+
+      <div class="container py-5 h-100 ">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="col-12 col-lg-9 col-xl-7">
+            <div class="card shadow-2-strong card-registration text-light" style="border-radius: 15px;">
+              <div class="card-body p-4 p-md-5">
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Formulario de Registro</h3>
+                <form action="/register" method="post">
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+
+                      <div class="form-outline">
+                        <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" />
+                        <label class="form-label" for="nombre">Nombre</label>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 mb-4">
+
+                      <div class="form-outline">
+                        <input type="text" id="correo" name="correo" class="form-control form-control-lg" />
+                        <label class="form-label" for="correo">Correo</label>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+
+                      <div class="form-outline">
+                        <input type="date" id="fecha" name="fecha" class="form-control form-control-lg" />
+                        <label class="form-label" for="fecha">fecha de nacimiento</label>
+                      </div>
+                      <div class="form-outline">
+                        <input type="file" id="imagen" class="form-control form-control-lg" accept="image" name="imagen"/>
+                        <label class="form-label" for="">seleccione foto</label>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4 pb-2">
+
+                      <div class="form-outline">
+                        <input type="password" id="contrasenia" name="contrasenia" class="form-control form-control-lg" />
+                        <label class="form-label" for="contrasenia">Contraseña</label>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 mb-4 pb-2">
+
+                      <div class="form-outline">
+                        <input type="password" id="contrasenia2" name="contrasenia2" class="form-control form-control-lg" />
+                        <label class="form-label" for="contrasenia2">Repite tu contraseña</label>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+
+                  <div class="mt-4 pt-2">
+                    <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                  </div>
+
+                </form>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-7 text-light">
-              <label htmlFor="email" class="label2">Correo Electronico</label>
-              <input
-                type="email"
-                name="email"
-                id="login"
-                class="form-control"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-7 text-light">
-              <label htmlFor="Password" class="label2">Contrasenia</label>
-              <input
-                type="password"
-                name="Password"
-                id="login"
-                class="form-control"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-7">
-              <button type="submit" class="btn btn-danger" id="btnlogin">
-                Registrar
-              </button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
-  </body>
+</body>
+
 </html>

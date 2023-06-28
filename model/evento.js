@@ -4,8 +4,7 @@ const sequelize = require("../config/database");
 class Evento extends Model {
   createEvent = async (data) => {
     try {
-      const evento = await Evento.create(data);
-      return evento.toJSON();
+      await Evento.create(data);
     } catch (err) {
       console.log(err);
       throw err;
