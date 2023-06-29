@@ -21,6 +21,7 @@ app.use(session({secret: "secret", resave: true, saveUninitialized: true }));
 
 app.use(require("./controller/routes/login"));
 app.use(require("./controller/routes/perfil"));
+app.use(require("./controller/routes/product"));
 
 
 app.get('/', (req, res) => {
