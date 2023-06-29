@@ -18,15 +18,11 @@ app.use(express.static("public"));
 app.use(session({secret: "secret", resave: true, saveUninitialized: true }));
 
 //rutas
-
+app.use(require("./controller/routes"))
 app.use(require("./controller/routes/login"));
 app.use(require("./controller/routes/perfil"));
 app.use(require("./controller/routes/product"));
-
-
-app.get('/', (req, res) => {
-  res.render('index',{title:'Reserva de Boletos', usuario: req.session.usuario})
-})
+app.use(require("./controller/routes/admin"))
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

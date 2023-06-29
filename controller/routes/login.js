@@ -18,7 +18,7 @@ router.get("/signout", (req, res) => {
     res.render('index', {
         usuario: false
     });
-})
+});
 
 //Post rutas
 router.post("/register" , usuarioControlador.createUser);

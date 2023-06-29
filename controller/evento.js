@@ -1,8 +1,11 @@
-const {event} = require("../model/Evento");
+const { event } = require("../model/Evento");
 
 const eventoController = {
-  getEventos: () => {
-    return event.getEventos();
+  getEventos: (req, res) => {
+    event.getEventos().then((eventos) => {
+      res.render('/', {usuario: req.susse})
+      
+    });
   },
   getEvento: (id) => {
     return event.getEvento(id);
@@ -19,7 +22,7 @@ const eventoController = {
       ubicacion: formData.ubicacion,
       ruta_imagen: "ruta",
     };
-    await event.createEvent(data); 
+    await event.createEvent(data);
     res.send(data);
   },
   updateEvento: (id, nuevos_datos) => {

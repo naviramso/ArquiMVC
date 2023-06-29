@@ -3,7 +3,6 @@
 body {
   overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
-  font-size: 16px;
 }
 
 /* Toggle Styles */
@@ -41,8 +40,7 @@ body {
 
 #sidebar header {
   background-color: #263238;
-  font-size: 20px;
-  line-height: 52px;
+  
   text-align: center;
 }
 
@@ -61,7 +59,6 @@ body {
   background: none;
   border-bottom: 1px solid #455A64;
   color: #CFD8DC;
-  font-size: 14px;
   padding: 16px 24px;
 }
 
@@ -72,4 +69,8 @@ body {
 
 #sidebar .nav a i{
   margin-right: 16px;
+}
+
+html{
+  font-size: 20px;
 }
