@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const router = Router();
 
-const eventCont = require("./controller/eventoController");
-const userCont = require("./controller/userController");
+const eventCont = require("../evento");
+const userCont = require("../usuario");
 
 //routes
 router.get("/", (req, res) => {
@@ -44,4 +44,5 @@ router.post('/create_evento' , eventCont.createEvento)
 // })
 
 router.get("/artista", (req, res) => {});
+
 module.exports = router;

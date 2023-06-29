@@ -1,20 +1,44 @@
-<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary " data-bs-theme="dark">
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <a href="/index" class="nav-link">Inicio</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-        Evento
-      </a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="/views/evento.ejs">Crear</a></li>
-        <li><a class="dropdown-item" href="#">Reservar</a></li>
-        <li><a class="dropdown-item" href="#">Comprar</a></li>
-      </ul>
-    </li>
-    <li class="nav-item" id="ultimo">
-      <a href="/" class="nav-link btn btn-danger">Cerrar Sesion</a>
-    </li>
-  </ul>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">RT</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end gap-3" id="collapsibleNavId">
+            <form class="d-flex my-2 my-lg-0">
+                <input class="form-control me-sm-2" type="text" placeholder="Search">
+                <button type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                        </path>
+                    </svg>
+                </button>
+            </form>
+            <div class="navbar-nav gap-2">
+                <% if (usuario) { %> <!-- pasar usuario aqui. -->
+                    <div class="flex-shrink-0 dropdown">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
+                                class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/signout">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+                <% } else { %>
+                    <a id="" class="btn btn-primary" href="/login" role="button">Login</a>
+                    <a id="" class="btn btn-primary" href="/register" role="button">Register</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
 </nav>

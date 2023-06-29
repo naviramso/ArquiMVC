@@ -1,12 +1,16 @@
 const { DataTypes, Model } = require("sequelize");
-const sequelize = require("../config/database");
+const sequelize = require("./config/database");
 
 class Usuario extends Model {
   getUsuario = async (nombre, contrasenia) => {
-    await Usuario.findOne({
-      where: { nombre: nombre, contrasenia: contrasenia },
+    return await Usuario.findOne({
+      where: {
+        nombre: nombre,
+        contrasenia: contrasenia,
+      },
     })
       .then((usuario) => {
+        console.log(usuario);
         return usuario;
       })
       .catch((err) => {
@@ -15,14 +19,13 @@ class Usuario extends Model {
       });
   };
 
-  getUsuarios = () => {
-    try {
-      const usuarios = Usuario.findAll();
+  getUsuarios = async () => {
+    await Usuario.findAll().then((usuarios) => {
       return usuarios.map((usuario) => usuario.toJSON());
-    } catch {
+    }).catch((err) => {
       console.log(err);
       throw err;
-    }
+    });
   };
 
   createUsuario = (data) => {
@@ -112,4 +115,5 @@ Usuario.init(
   }
 );
 
+const user = new Usuario();
 module.exports = new Usuario();
