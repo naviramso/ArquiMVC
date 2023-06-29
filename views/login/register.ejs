@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%- include('partials/heads.ejs') %>
+  <%- include('../partials/heads.ejs') %>
     <title>Document</title>
 </head>
 
 <body class="bg-dark">
-  <%- include('partials/nav2.ejs') %>
+  <%- include('../partials/nav.ejs') %>
     <div class="bg-dark d-flex justify-content-center align-items-center vh-100">
 
       <div class="container py-5 h-100 ">
@@ -27,15 +24,12 @@
                         <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" />
                         <label class="form-label" for="nombre">Nombre</label>
                       </div>
-
                     </div>
                     <div class="col-md-6 mb-4">
-
                       <div class="form-outline">
                         <input type="text" id="correo" name="correo" class="form-control form-control-lg" />
                         <label class="form-label" for="correo">Correo</label>
                       </div>
-
                     </div>
                   </div>
                   <div class="row">
@@ -71,9 +65,6 @@
 
                     </div>
                   </div>
-
-
-
                   <div class="mt-4 pt-2">
                     <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
                   </div>

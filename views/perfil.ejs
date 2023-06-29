@@ -2,129 +2,175 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <%- include('partials/heads.ejs') %>
-        <title>Perfil</title>
+
+  <meta charset="UTF-8">
+  <title>CodePen Demo</title>
+
+  <meta name="robots" content="noindex">
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+  <link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+  <link rel="canonical" href="https://codepen.io/blcveen/pen/jwMdrX?editors=1111">
+
+  
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+
+  <style id="INLINE_PEN_STYLESHEET_ID">
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+
+
+
+/* Toggle Styles */
+
+#viewport {
+  padding-left: 250px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#content {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
+}
+
+/* Sidebar Styles */
+
+#sidebar {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #37474F;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#sidebar header {
+  background-color: #263238;
+  font-size: 20px;
+  line-height: 52px;
+  text-align: center;
+}
+
+#sidebar header a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+}
+
+#sidebar header a:hover {
+  color: #fff;
+}
+
+#sidebar .nav{
+  
+}
+
+#sidebar .nav a{
+  background: none;
+  border-bottom: 1px solid #455A64;
+  color: #CFD8DC;
+  font-size: 14px;
+  padding: 16px 24px;
+}
+
+#sidebar .nav a:hover{
+  background: none;
+  color: #ECEFF1;
+}
+
+#sidebar .nav a i{
+  margin-right: 16px;
+}
+  </style>
+
+  
+<script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-6bce046e7128ddf9391ccf7acbecbf7ce0cbd7b6defbeb2e217a867f51485d25.js"></script>
+<script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-44fe83e49b63affec96918c9af88c0d80b209a862cf87ac46bc933074b8c557d.js"></script>
+<script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
+
+  <%- include('partials/heads.ejs') %>
+    <title>Perfil</title>
 </head>
 
 <body class="bg-dark">
-    <%- include('partials/nav2.ejs') %>
-
-
-    
-    <div class="container-fluid">
-        <div class="row row-cols-3 row-cols-md-3 row-cols-lg-4 g-4">
-            <div class="col main">
-                <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                      <span class="fs-4">Sidebar</span>
-                    </a>
-                    <hr>
-                    <ul class="nav nav-pills flex-column mb-auto">
-                      <li class="nav-item">
-                        <a href="#" class="nav-link active" aria-current="page">
-                          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                          Home
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="nav-link link-dark">
-                          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                          Dashboard
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="nav-link link-dark">
-                          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                          Orders
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="nav-link link-dark">
-                          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                          Products
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" class="nav-link link-dark">
-                          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                          Customers
-                        </a>
-                      </li>
-                    </ul>
-                    <hr>
-                    <div class="dropdown">
-                      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                        <strong>mdo</strong>
-                      </a>
-                      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                      </ul>
-                    </div>
-                  </div>
-            </div>
-
-            <div class="col-2 col-md-2 col-lg-3">
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="../img/acdc.jpg" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="..." class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="..." class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <%- include('partials/nav.ejs') %>
+    <div id="viewport">
+      <!-- Sidebar -->
+      <div id="sidebar">
+        <header>
+          <a href="#">Perfil</a>
+        </header>
+        <ul class="nav">
+          <li>
+            <a href="#">
+              <i class="zmdi zmdi-view-dashboard"></i> Reservas
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="zmdi zmdi-link"></i> Ventas
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="zmdi zmdi-widgets"></i> Overview
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="zmdi zmdi-calendar"></i> Events
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="zmdi zmdi-info-outline"></i> About
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="zmdi zmdi-settings"></i> Services
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="zmdi zmdi-comment-more"></i> Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- Content -->
+      <div id="content">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="#"><i class="zmdi zmdi-notifications text-danger"></i>
+                </a>
+              </li>
+              <li><a href="#">Test User</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="container-fluid">
+          <h1>Simple Sidebar</h1>
+          <p>
+            Make sure to keep all page content within the
+            <code>#content</code>.
+          </p>
         </div>
-         
-        
+      </div>
     </div>
-
-
     <%- include('partials/footer.ejs') %>
 
 </body>
