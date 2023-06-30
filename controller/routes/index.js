@@ -2,13 +2,10 @@ const {Router} = require('express');
 const router = Router()
 const evento = require('../evento')
 
-router.get('/', (req, res) => {
-    const eventos = evento.getEventos()
-    res.render('index', {
-        usuario : req.session.usuario,
-        eventos : eventos,
-        titulo: 'La bole',
-    })
+router.get('/', (req, res)=>{
+    res.render('index', {usuario : req.session.usuario})
 })
+
+router.get('/eventos', evento.getEventos)
 
 module.exports = router;

@@ -1,58 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('partials/heads.ejs')%>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('partials/heads.ejs')%>
     <title>Document</title>
-  </head>
-  <body class="image">
-    <%- include('partials/nav2.ejs') %>
+</head>
+
+<body class="image bg-dark">
+  <%- include('partials/nav.ejs') %>
     <div class="container">
       <div>
-        <h1 class="text-center text-light"><%= title %></h1>
+        <h1 class="text-center text-light">Registro de Eventos</h1>
       </div>
-      <form action="/create_evento" method="post">
-        <div class="row">
-          <div class="col-md-4">
-            <label htmlFor="nombreEvento" class="form-label text-light"
-              >Nombre del Evento</label
-            >
-            <input type="text" name="nombreEvento" id="" class="form-control border-dark" />
+      <form class="row g-3 text-light" id="registroEvento">
+        <div class="col-md-3">
+          <label for="validationServer01" class="form-label">Nombre evento*</label>
+          <input type="text" class="form-control " id="validationServer01" name="nombre_evento" 
+            required>
+          <div class="valid-feedback">
+            
           </div>
-          <div class="col-md-4">
-            <label htmlFor="fechaInicio" class="form-label text-light"
-              >Fecha de Inicio</label
-            >
-            <input type="date" name="fechaInicio" id="" class="form-control border-dark" />
+        </div>
+
+        <div class="col-md-3">
+          <label for="validationServerUsername" class="form-label">Fecha Inicio*</label>
+          <input type="date" class="form-control " name="fecha_evento" required>
+          <div class="invalid-feedback">
+            Por favor escriba una fecha válida
           </div>
-          <div class="col-md-4">
-            <label htmlFor="fechaFin" class="form-label text-light"
-              >Nombre de Cierre</label
-            >
-            <input type="date" name="fechaFin" id="" class="form-control border-dark" />
+        </div>
+        <div class="col-md-3">
+          <label for="validationServerUsername" class="form-label">Hora*</label>
+          <input type="time" class="form-control " name="hora_evento" required>
+          <div class="invalid-feedback">
+            Por favor escriba una fecha válida
           </div>
-          <div class="col-md-4">
-            <label htmlFor="horaEvento" class="form-label text-light"
-              >Hora del Evento</label
-            >
-            <input type="time" name="horaEvento" id="" class="form-control border-dark" />
+        </div>
+        <div class="col-md-3">
+          <label for="validationServerUsername" class="form-label">Fecha Fin</label>
+          <input type="date" class="form-control " name="fecha_fin" >
+          <div class="invalid-feedback">
+            Por favor escriba una fecha válida
           </div>
-          <div class="col-md-4">
-            <label htmlFor="ubicacion" class="form-label text-light"
-              >Ubicacion</label
-            >
-            <input type="text" name="ubicacion" id="" class="form-control border-dark" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="validationServer02" class="form-label">Descripcion</label>
+          <textarea class="form-control " id="validationServer02" name="descripcion" row="3"
+            ></textarea>
+          <div class="valid-feedback">
+            
           </div>
-          <div class="col-md-4">
-            <input type="file" name="file" id="file" class="inputfile" />
-            <label for="file" class="label1">Subir Imagen</label>
+        </div>
+
+        <div class="col-md-6">
+          <label for="validationServer01" class="form-label">Ubicacion*</label>
+          <input type="text" class="form-control " id="validationServer01" name="ubicacion"
+            required>
+          <div class="valid-feedback">
+           
           </div>
-          <div class="col btn">
-            <button type="submit" class="btn btn-danger">Registrar</button>
-          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="validationServer05" class="form-label">Nombre de Artista*</label>
+          <input type="text" class="form-control " id="validationServer05" name="nombre_artista" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="validationServer03" class="form-label">Imagen</label>
+          <input type="text" class="form-control " id="validationServer03" name="ruta_imagen" required>
+        </div>
+
+        <div class="col-md-2">
+          <label for="validationServer04" class="form-label">Cant Boletos*</label>
+          <input type="number" class="form-control " id="validationServer04" name="cantidad" min="1" required>
+        </div>
+        <div class="col-md-2">
+          <label for="validationServer04" class="form-label">Precio*</label>
+          <input type="number" step="0.01" min="0" placeholder="0.00" class="form-control " id="validationServer04" name="precio" min="1" required>
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Registrar Evento</button>
         </div>
       </form>
     </div>
-  </body>
+
+    <script src="../js/registro.js"></script>
+</body>
+
 </html>

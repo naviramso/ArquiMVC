@@ -1,8 +1,13 @@
 const user = require("../model/Usuario");
+const reserva = require("../model/Reserva");
 
 const userController = {
-  getUsers: () => {
-    return user.getUsers();
+  perfil: (req, res) => {
+    console.log(req.session.usuario.id + "HHHHHHHHHHHHOOOOOLA")
+    req.session.usuario ? 
+    reserva.getReservasByUser(req.session.usuario.id).then((reservas) => {
+      res.send(reservas);
+    }) : res.send([])
   },
   getUser: (req, res) => {
     const nombre = req.body.nombre;
@@ -50,12 +55,6 @@ const userController = {
         console.log(err);
         throw err;
       });
-  },
-  updateUser: (id, name, email, password) => {
-    return user.updateUser(id, name, email, password);
-  },
-  deleteUser: (id) => {
-    return user.deleteUser(id);
   },
 };
 

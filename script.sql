@@ -36,32 +36,7 @@ CREATE TABLE eventos (
   fecha_cierre DATE,
   ubicacion VARCHAR(100) NOT NULL,
   ruta_imagen VARCHAR(100),
-  fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  ultima_actualizacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY  (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------------
--- TABLE ARTISTA-EVENTO
--- --------------------------------------------------------------
-CREATE TABLE artista_evento (
-  id_evento INT UNSIGNED NOT NULL,
-  id_artista INT UNSIGNED NOT NULL,
-  fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  ultima_actualizacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY  (id_evento, id_artista),
-  KEY idx_fk_id_evento (id_evento),
-  KEY idx_fk_id_artista (id_artista),
-  CONSTRAINT fk_evento_artista FOREIGN KEY (id_evento) REFERENCES evento (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_artista_evento FOREIGN KEY (id_artista) REFERENCES artista (id) ON DELETE RESTRICT ON UPDATE CASCADE
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
--- --------------------------------------------------------------
--- TABLE ARTISTA							    -
--- --------------------------------------------------------------
-CREATE TABLE artistas(
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  nombre_artista VARCHAR(100) NOT NULL,
-  ruta_imagen VARCHAR(100),
+  nombre_artista VARCHAR(100),
   fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   ultima_actualizacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (id)
@@ -74,11 +49,10 @@ CREATE TABLE boletos (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
   id_evento INT UNSIGNED NOT NULL,
   precio DECIMAL(10,2) NOT NULL,
+  cantidad INT NOT NULL,
   fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   ultima_actualizacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY  (id),
-  KEY idx_fk_id_evento (id_evento),
-  CONSTRAINT fk_evento_boleto FOREIGN KEY (id_evento) REFERENCES evento (id) ON DELETE RESTRICT ON UPDATE CASCADE
+  PRIMARY KEY  (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------------
@@ -94,13 +68,7 @@ CREATE TABLE reservas (
   fecha_reserva TIMESTAMP NOT NULL,
   fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   ultima_actualizacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY  (id),
-  KEY idx_fk_id_venta (id_venta),
-  KEY idx_fk_id_boleto (id_boleto),
-  KEY idx_fk_id_usuario (id_usuario),
-  CONSTRAINT fk_venta_reserva FOREIGN KEY (id_venta) REFERENCES venta (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_boleto_reserva FOREIGN KEY (id_boleto) REFERENCES boleto (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT fk_usuario_reserva FOREIGN KEY (id_usuario) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE
+  PRIMARY KEY  (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------------
@@ -114,9 +82,7 @@ CREATE TABLE ventas (
   total_venta DECIMAL(10,2) NOT NULL,
   fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   ultima_actualizacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY  (id),
-  KEY idx_fk_id_usuario (id_usuario),
-  CONSTRAINT fk_usuario_venta FOREIGN KEY (id_usuario) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE
+  PRIMARY KEY  (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET SQL_MODE=@OLD_SQL_MODE;

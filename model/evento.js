@@ -2,13 +2,13 @@ const { DataTypes, Model } = require("sequelize");
 const sequelize = require("./config/database");
 
 class Evento extends Model {
-  createEvent = async (data) => {
-    try {
-      await Evento.create(data);
-    } catch (err) {
+  createEvento = (data) => {
+    return Evento.create(data).then((evento) => {
+      return evento;
+    }).catch((err) => {
       console.log(err);
       throw err;
-    }
+    });
   };
 
   updateEvent = async (id, data) => {
@@ -21,7 +21,7 @@ class Evento extends Model {
       console.log(err);
       throw err;
     }
-  }
+  };
 
   deleteEvent = async (id) => {
     try {
@@ -33,16 +33,30 @@ class Evento extends Model {
       console.log(err);
       throw err;
     }
-  }
+  };
 
-  getEvent = async (id) => {
-    try {
-      const evento = await Evento.findByPk(id);
-      return evento.toJSON();
-    } catch (err) {
+  getEvent = (id) => {
+    return  Evento.findByPk(id)
+      .then((evento) => {
+        return evento ? evento.toJSON() : null;
+      })
+      .catch((err) => {
+        console.log(err);
+        throw err;
+      });
+  };
+
+  getEventByNombre = (nombre) => {
+    return Evento.findOne({
+      where: {
+        nombre_evento: nombre,
+      },
+    }).then((evento) => {
+      return evento ? evento.toJSON() : null;
+    }).catch((err) => {
       console.log(err);
       throw err;
-    }
+    });
   }
 
   getEventos = async () => {
@@ -53,7 +67,9 @@ class Evento extends Model {
       console.log(err);
       throw err;
     }
-  }
+  };
+
+ 
 }
 
 Evento.init(
@@ -78,7 +94,7 @@ Evento.init(
       onUpdate: DataTypes.NOW,
     },
     hora_evento: {
-      type: DataTypes.TIME
+      type: DataTypes.TIME,
     },
     fecha_cierre: {
       type: DataTypes.DATE,
@@ -93,7 +109,11 @@ Evento.init(
     ruta_imagen: {
       type: DataTypes.STRING(100),
     },
-    fecha_creacion : {
+    nombre_artista: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    fecha_creacion: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
@@ -103,16 +123,15 @@ Evento.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
       onUpdate: DataTypes.NOW,
-    }
+    },
   },
   {
     sequelize,
     modelName: "Evento",
     tableName: "eventos",
-    createdAt: 'fecha_creacion',
-    updatedAt: 'ultima_actualizacion',
+    createdAt: "fecha_creacion",
+    updatedAt: "ultima_actualizacion",
   }
 );
-const event = new Evento();
-module.exports = {event, Evento};
 
+module.exports =  new Evento() ;

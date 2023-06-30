@@ -2,7 +2,7 @@ const { Sequelize } = require("sequelize");
 
 const parametres = {
     db : process.env.DB || "eventos_db",
-    host: process.env.HOST || "192.168.78.216",
+    host: process.env.HOST || 'localhost' ,// ||"192.168.78.216",
     user: process.env.USER || "root",
     password: process.env.PASSWORD || "",
     port: process.env.PORT || 3306,

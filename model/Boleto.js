@@ -1,5 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("./config/database");
+ 
+
 
 class Boleto extends Model {
   createBoleto = async (data) => {
@@ -22,7 +24,7 @@ class Boleto extends Model {
       console.log(err);
       throw err;
     }
-  }
+  };
 
   deleteBoleto = async (id) => {
     try {
@@ -34,16 +36,17 @@ class Boleto extends Model {
       console.log(err);
       throw err;
     }
-  }
+  };
 
-  getBoleto = async (id) => {
-    try {
-      const boleto = await Boleto.findByPk(id);
-      return boleto.toJSON();
-    } catch (err) {
+  getBoleto = (id_evento) => {
+    return Boleto.findOne({
+      where: { id_evento: id_evento },
+    }).then((boleto) => {
+      return boleto ? boleto.toJSON() : null;
+    }).catch((err) => {
       console.log(err);
       throw err;
-    }
+    })
   }
 
   getBoletos = async () => {
@@ -54,31 +57,18 @@ class Boleto extends Model {
       console.log(err);
       throw err;
     }
-  }
+  };
 
-  updateBoleto = async (id, nuevos_datos) => {
-    try {
-      const boleto = await Boleto.update(nuevos_datos, {
-        where: { id: id },
+  getBoletoById = (id) => {
+    return Boleto.findByPk(id)
+      .then((boleto) => {
+        return boleto ? boleto.toJSON() : null;
+      })
+      .catch((err) => {
+        console.log(err);
+        throw err;
       });
-      return boleto;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  }
-
-  deleteBoleto = async (id) => {
-    try {
-      const boleto = await Boleto.destroy({
-        where: { id: id },
-      });
-      return boleto;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  }
+  };
 }
 
 Boleto.init(
@@ -90,6 +80,10 @@ Boleto.init(
     },
     id_evento: {
       type: DataTypes.INTEGER,
+    },
+    cantidad: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     precio: {
       type: DataTypes.DECIMAL(10, 2),
@@ -105,7 +99,7 @@ Boleto.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
       onUpdate: DataTypes.NOW,
-    }
+    },
   },
   {
     sequelize,
@@ -116,11 +110,5 @@ Boleto.init(
   }
 );
 
-Boleto.belongsTo(Evento, {
-  foreignKey: "id_evento",
-  targetKey: "id",
-  onDelete: "RESTRICT",
-  onUpdate: "CASCADE",
-})
 
-module.exports = new Boleto();
+module.exports =new Boleto ();

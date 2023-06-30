@@ -3,36 +3,49 @@
 
 <head>
     <%- include('./partials/heads.ejs') %>
-        <title>Document</title>
+        <title>
+            <%= titulo %>
+        </title>
 </head>
 
 <body>
     <%- include('./partials/nav.ejs') %>
+        <div id="id_boleto" disable>
+            <%= id_boleto %>
+        </div>
+        </div>
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
-                <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
-                            src="../img/acdc.jpg" alt="..." /></div>
-                    <div class="col-md-6">
-                        <div class="small mb-1">SKU: BST-498</div>
-                        <h1 class="display-5 fw-bolder">Concierto</h1>
+                <div class="row row-cols-1 row-cols-md-5 row-cols-lg-3 gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-5"><img class="card-img-top mb-4 mb-md-0" style="width: 400px;" src=<%=imagen %>
+                        alt="..." /></div>
+                    <div class="col-md-1">
+
+                        <h1 class="display-5 fw-bolder">
+                            <%= titulo %>
+                        </h1>
+                        <p class="lead">
+                            <%= descripcion %>
+                                </>
+                        </p>
                         <div class="fs-5 mb-5">
-                            <span class="text-decoration-line-through">$45.00</span>
-                            <span>$40.00</span>
+                            <span>Precio: Bs.<%= precio %> </span>
+                            <br>
+                            <span id="cantidad">Cantidad Boletos Disponibles: <%= cantidad %></span>
                         </div>
-                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem
-                            quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius
-                            blanditiis delectus ipsam minima ea iste laborum vero?</p>
+
                         <div class="d-flex gap-5">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
                                 style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                Add to cart
+                            <button id="reservar" class="btn btn-outline-dark flex-shrink-0" type="button" <%
+                                if(!usuario) { %> onClick=window.location.href="/login"> <% } %>
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Reservar
                             </button>
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                Comprar
+                            <button id="comprar" class="btn btn-outline-dark flex-shrink-0" type="button" <%
+                                if(!usuario) { %> onClick=window.location.href="/login"> <% } %>
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Comprar
                             </button>
                         </div>
                     </div>
@@ -164,7 +177,40 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#reservar').click(function () {
+                    var id_boleto = '<%= id_boleto %>';
+                    var cantidad_reserva = $('#inputQuantity').val();
+                    var cantidad = '<%= cantidad %>';
+
+                    // Crear el objeto de datos a enviar
+                    var data = {
+                        id_boleto: id_boleto,
+                        cantidad_reserva: cantidad_reserva,
+                        cantidad: cantidad
+                    };
+
+                    // Realizar la petición AJAX
+                    $.ajax({
+                        url: '/reserva', // Reemplaza con la ruta adecuada en tu servidor
+                        type: 'POST',
+                        data: data,
+                        success: function (response) {
+                            // Procesar la respuesta del servidor
+                            console.log(response)
+                            alert("Reserva realizada con éxito" );
+                            $('#cantidad').text("Cantidad Boletos Disponibles: " + response);
+                        },
+                        error: function (xhr, status, error) {
+                            // Manejar errores de la petición
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+        </script>
+
 
 </body>
 

@@ -115,5 +115,5 @@ Usuario.init(
   }
 );
 
-const user = new Usuario();
+
 module.exports = new Usuario();

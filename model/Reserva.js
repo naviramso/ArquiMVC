@@ -1,5 +1,5 @@
-const { DataTypes, Model} = require('sequelize');
-const sequelize = require('./config/database');
+const { DataTypes, Model } = require("sequelize");
+const sequelize = require("./config/database");
 
 class Reserva extends Model {
   createReserva = async (data) => {
@@ -22,7 +22,7 @@ class Reserva extends Model {
       console.log(err);
       throw err;
     }
-  }
+  };
 
   deleteReserva = async (id) => {
     try {
@@ -34,7 +34,7 @@ class Reserva extends Model {
       console.log(err);
       throw err;
     }
-  }
+  };
 
   getReserva = async (id) => {
     try {
@@ -44,7 +44,7 @@ class Reserva extends Model {
       console.log(err);
       throw err;
     }
-  }
+  };
 
   getReservas = async () => {
     try {
@@ -54,70 +54,71 @@ class Reserva extends Model {
       console.log(err);
       throw err;
     }
+  };
+
+  getReservasByUser = async function (idUsuario) {
+    try {
+      const reservas = await this.sequelize.query(
+        'SELECT e.nombre_evento, e.ruta_imagen, e.descripcion, r.cant_reserva, e.fecha_evento, e.hora_evento, r.fecha_creacion, b.precio ' +
+        'FROM eventos e, boletos b, reservas r, usuarios u ' +
+        'WHERE r.id_usuario = u.id ' +
+        'AND r.id_boleto = b.id ' +
+        'AND b.id_evento = e.id ' +
+        'AND id_usuario = :idUsuario',
+        {
+          replacements: { idUsuario },
+          type: this.sequelize.QueryTypes.SELECT
+        }
+      );
+  
+      const r = reservas;
+      console.log(r)
+      return r;
+    } catch (error) {
+      throw error;
+    }
   }
 }
- 
-Reserva.init({
-  id: {
-    type: DataTypes.INTEGER.UNSIGNED,
-    primaryKey: true,
-    autoIncrement: true,
+
+Reserva.init(
+  {
+    id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    id_venta: {
+      type: DataTypes.INTEGER.UNSIGNED,
+    },
+    id_boleto: {
+      type: DataTypes.INTEGER.UNSIGNED,
+    },
+    id_usuario: {
+      type: DataTypes.INTEGER.UNSIGNED,
+    },
+    cant_reserva: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
+    fecha_creacion: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    ultima_actualizacion: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+      onUpdate: DataTypes.NOW,
+    },
   },
-  id_venta: {
-    type: DataTypes.INTEGER.UNSIGNED,
-  },
-  id_boleto: {
-    type: DataTypes.INTEGER.UNSIGNED,
-  },
-  id_usuario: {
-    type: DataTypes.INTEGER.UNSIGNED,
-  },
-  cantidad_reserva : {
-    type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false,
-  },
-  fecha_creacion: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW,
-  },
-  ultima_actualizacion: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW,
-    onUpdate: DataTypes.NOW,
+  {
+    sequelize,
+    modelName: "reserva",
+    tableName: "reservas",
+    createdAt: "fecha_creacion",
+    updatedAt: "ultima_actualizacion",
   }
-},{
-  sequelize,
-  modelName: 'reserva',
-  tableName: 'reservas',
-  createdAt: 'fecha_creacion',
-  updatedAt: 'ultima_actualizacion',
-})
-
-Reserva.belongsTo(Usuario, {
-  foreignKey: 'id_usuario',
-  targetKey: 'id',
-  as: 'usuario',
-  onDelete: 'RESTRICT',
-  onUpdate: 'CASCADE',
-})
-
-Reserva.belongsTo(Boleto, {
-  foreignKey: 'id_boleto',
-  targetKey: 'id',
-  as: 'boleto',
-  onDelete: 'RESTRICT',
-  onUpdate: 'CASCADE',
-})
-
-Reserva.belongsTo(Venta, {
-  foreignKey: 'id_venta',
-  targetKey: 'id',
-  as: 'venta',
-  onDelete: 'RESTRICT',
-  onUpdate: 'CASCADE',
-})
-
+);
 
 module.exports = new Reserva();
